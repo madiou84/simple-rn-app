@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-    Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity,
-    ActivityIndicator,
-} from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
+import LoadingButton from '../LoadingButton';
 
-export default function ({ content, setContent, loader, handlePressPublished, ...rest }) {
+export default function MakePost ({ content, setContent, loader, handlePressPublished }: any) {
     return (
         <>
             <TextInput
-                {...rest}
                 value={content}
                 style={style.input}
                 returnKeyType="send"
@@ -21,21 +15,12 @@ export default function ({ content, setContent, loader, handlePressPublished, ..
                 onSubmitEditing={() => content && handlePressPublished()}
             />
 
-            <TouchableOpacity
+            <LoadingButton
+                style={style}
+                loader={loader}
                 disabled={!content}
-                style={style.buttonContainer}
                 onPress={handlePressPublished}
-            >
-                {loader && <ActivityIndicator
-                    size="small"
-                    color="#00ff00"
-                    style={style.loader}
-                />}
-                
-                <Text style={style.button}>
-                    Publier
-                </Text>
-            </TouchableOpacity>
+            />
         </>
     )
 }
@@ -64,13 +49,9 @@ const style = StyleSheet.create({
         backgroundColor: '#ffd700',
     },
     button: {
-        fontSize: 20,
+        fontSize: 22,
         color: "#fff",
-        fontWeight: "500",
         fontWeight: 'bold',
         textAlign: "center",
-    },
-    loader: {
-        marginHorizontal: 4
     }
 })

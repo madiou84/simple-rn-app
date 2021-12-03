@@ -1,18 +1,22 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, } from 'react-native';
 
-export default function Post ({ photo, content }) {
+import Loader from '../Loader';
+import PostModel from '../../models/Post';
+
+export default function Post ({ photo, content, loader }: PostModel) {
     return (
         <View style={style.postContainer}>
             <Text style={style.postTitle}>
                 {content}
             </Text>
-
-            <Image
-                resizeMode="cover"
-                source={{ uri: photo }}
-                style={style.postImage}
-            />
+            {loader ? <Loader/> : (
+                <Image
+                    resizeMode="cover"
+                    source={{ uri: photo }}
+                    style={style.postImage}
+                />
+            )}
         </View>
     )
 }
